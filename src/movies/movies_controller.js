@@ -16,13 +16,14 @@ const getMovies = async (req, res) => {
   try {
     let filterMovies = [];
     if (req.query.name) {
-      filterMovies.push({ name: req.query.name });
+      //filterMovies.push({ name: req.query.name });
+      filterMovies.push({ name:  { "$regex": req.query.name, "$options": "i" } });
     }
     if (req.query.actors) {
-      filterMovies.push({ actors: req.query.actors });
+      filterMovies.push({ actors: { "$regex": req.query.actors, "$options": "i" }   });
     }
     if (req.query.genre) {
-      filterMovies.push({ genre: req.query.genre });
+      filterMovies.push({ genre: { "$regex": req.query.genre, "$options": "i" }});
     }
     if (req.query.name || req.query.actor || req.query.genre) {
       const list = await Movie.find({

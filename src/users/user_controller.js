@@ -16,17 +16,27 @@ export {
 
 const postUser = async (req, res) => {
   try {
-    const userCreated = {
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      role: 'client',
-      avatar: req.body.avatar,
-      preferences: req.body.preferences,
-      points: req.body.points,
-    };
-    const newUser = await user.create(userCreated);
-    res.status(200).json(newUser);
+    const users = await user.find({
+      email: req.body.email
+    });
+    if(users.length>0)
+    {
+      res.status(200).json("wrongexist");
+
+    }else{
+      const userCreated = {
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        role: 'client',
+        avatar: req.body.avatar,
+        preferences: req.body.preferences,
+        points: req.body.points,
+      };
+      const newUser = await user.create(userCreated);
+      res.status(200).json(newUser);
+    }
+     
   } catch (error) {
     res.status(200).json("wrong");
   }
