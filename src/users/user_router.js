@@ -1,9 +1,9 @@
 import express from 'express';
 const router = express.Router();
-import {postUser, getUser, findById, updateUser, deleteUser, loginUser, verifyToken, authoritation, authoritation_admin } from "./user_controller.js";
+import {postUser, getUser, findById, updateUser, deleteUser, loginUser, verifyToken, authoritation, authoritation_admin, logoutUser } from "./user_controller.js";
 
 
-router.post('/user', authoritation_admin, postUser);  //AÑADIR UN NUEVO USUARIO
+router.post('/user', postUser);  //AÑADIR UN NUEVO USUARIO
 
 router.post('/login', loginUser); //LOGIN USUARIO CON EMAIL Y CONTRASEÑA
 
@@ -13,11 +13,11 @@ router.get('/user/:id', authoritation_admin, findById);  //BUSCAR UN USUARIO POR
 
 router.get('/auth/:token', authoritation_admin, verifyToken);  //DESCODIFICAR UN TOKEN Y VERIFICAR SI ES CORRECTO
 
-router.patch('/user',authoritation_admin, updateUser);  //BUSCAR DATOS DE USUARIO POR QUERY Y EDITAR POR BODY
+router.patch('/user/:id',authoritation_admin, updateUser);  //BUSCAR DATOS DE USUARIO POR QUERY Y EDITAR POR BODY
 
 router.delete('/user/:id', authoritation_admin, deleteUser);     //ELIMINAR UN USUARIO POR ID
 
-
+router.post('/logout', logoutUser);    //LOGOUT DEL USUARIO POR MAIL Y CONTRASEÑA EN EL BODY
 
 
 export default router;

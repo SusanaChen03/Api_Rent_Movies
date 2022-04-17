@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose';
 
 const moviesSchema = new mongoose.Schema({
@@ -6,6 +5,11 @@ const moviesSchema = new mongoose.Schema({
     year: Number,
     genre: String,
     actor: String,
+    price: Number,
+    rentTime: Number,
+    points: Number, 
+    state: String,
+    image: String
 });
 
 
